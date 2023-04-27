@@ -15,7 +15,7 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async addJob(): Promise<Job<any>> {
-    return this.baseJobQueue.add({});
+  async addJob(jobType: string): Promise<Job<any>> {
+    return this.baseJobQueue.add({}, { jobId: jobType });
   }
 }

@@ -1,9 +1,6 @@
-import { Controller, Get, Post } from '@nestjs/common';
-import { Queue } from 'bull';
-import { InjectQueue } from '@nestjs/bull';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { AppService } from './app.service';
-import { QUEUE_NAMES } from './queue/enums/queue.enum';
 
 @Controller()
 export class AppController {
@@ -14,9 +11,9 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post()
-  async addJob() {
-    await this.appService.addJob();
+  @Post('jobs')
+  async addJob(@Body('jobType') jobType: string) {
+    await this.appService.addJob(jobType);
     return {
       message: 'Job added',
     };
