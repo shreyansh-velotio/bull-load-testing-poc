@@ -3,8 +3,8 @@ import { BullModule } from '@nestjs/bull';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BaseJob } from './queue/consumers/base.job';
-import { QUEUE_NAMES } from './queue/enums/queue.enum';
+import { BaseJob } from './queues/consumers/base.job';
+import { QUEUE_NAMES } from './queues/enums/queue.enum';
 import { REDIS_PORT, REDIS_URL } from './constants';
 
 @Module({
