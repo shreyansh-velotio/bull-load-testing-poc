@@ -3,7 +3,7 @@ import { Processor, Process } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 
 import { QUEUE_NAMES } from '../../enums/queue-name.enum';
-import { JOB_NAMES } from 'src/queues/enums/job-name.enum';
+import { JOB_NAMES } from '../../enums/job-name.enum';
 
 @Processor(QUEUE_NAMES.LOCAL_SCHEDULED_JOBS_QUEUE)
 export class LocalBaseJob {

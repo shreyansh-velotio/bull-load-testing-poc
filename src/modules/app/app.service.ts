@@ -2,7 +2,7 @@ import { InjectQueue } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
 import { Queue, Job } from 'bull';
 
-import { QUEUE_NAMES } from './queues/enums/queue-name.enum';
+import { QUEUE_NAMES } from '../queues/enums/queue-name.enum';
 
 @Injectable()
 export class AppService {

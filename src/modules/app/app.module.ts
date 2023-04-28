@@ -3,10 +3,10 @@ import { BullModule, BullQueueProcessor } from '@nestjs/bull';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { QUEUE_NAMES } from './queues/enums/queue-name.enum';
-import { REDIS_PORT, REDIS_URL } from './constants';
-import GLOBAL_CONSUMERS from './queues/consumers/global';
-import LOCAL_CONSUMERS from './queues/consumers/local';
+import GLOBAL_CONSUMERS from '../queues/consumers/global';
+import { REDIS_PORT, REDIS_URL } from 'src/constants';
+import { QUEUE_NAMES } from '../queues/enums/queue-name.enum';
+import LOCAL_CONSUMERS from '../queues/consumers/local';
 
 const globalQueueProcessors: BullQueueProcessor[] = [...GLOBAL_CONSUMERS].map(
   (consumer) => {
