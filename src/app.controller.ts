@@ -11,11 +11,19 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post('jobs')
-  async addJob(@Body('jobType') jobType: string) {
-    await this.appService.addJob(jobType);
+  @Post('local-jobs')
+  async addLocalJob(@Body('jobType') jobType: string) {
+    await this.appService.addLocalJob(jobType);
     return {
-      message: 'Job added',
+      message: 'Local job added',
+    };
+  }
+
+  @Post('global-jobs')
+  async addGlobalJob(@Body('jobType') jobType: string) {
+    await this.appService.addGlobalJob(jobType);
+    return {
+      message: 'Global job added',
     };
   }
 }

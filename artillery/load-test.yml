@@ -7,9 +7,9 @@ config:
     headers:
       Content-Type: 'application/json'
 scenarios:
-  - name: 'Add job'
+  - name: 'Add local job'
     flow:
       - post:
-          url: '/jobs'
+          url: '/local-jobs'
           json:
-            jobType: 'base'
+            jobType: 'local-base'

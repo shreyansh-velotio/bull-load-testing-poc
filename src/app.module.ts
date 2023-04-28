@@ -1,11 +1,22 @@
 import { Module } from '@nestjs/common';
-import { BullModule } from '@nestjs/bull';
+import { BullModule, BullQueueProcessor } from '@nestjs/bull';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BaseJob } from './queues/consumers/base.job';
-import { QUEUE_NAMES } from './queues/enums/queue.enum';
+import { QUEUE_NAMES } from './queues/enums/queue-name.enum';
 import { REDIS_PORT, REDIS_URL } from './constants';
+import GLOBAL_CONSUMERS from './queues/consumers/global';
+import LOCAL_CONSUMERS from './queues/consumers/local';
+
+const globalQueueProcessors: BullQueueProcessor[] = [...GLOBAL_CONSUMERS].map(
+  (consumer) => {
+    return {
+      name: consumer.JOB_NAME,
+      path: consumer.PATH,
+      concurrency: consumer.CONCURRENCY,
+    };
+  },
+);
 
 @Module({
   imports: [
@@ -18,8 +29,12 @@ import { REDIS_PORT, REDIS_URL } from './constants';
     BullModule.registerQueue({
       name: QUEUE_NAMES.LOCAL_SCHEDULED_JOBS_QUEUE,
     }),
+    BullModule.registerQueue({
+      name: QUEUE_NAMES.GLOBAL_SCHEDULED_JOBS_QUEUE,
+      processors: globalQueueProcessors,
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService, BaseJob],
+  providers: [AppService, ...LOCAL_CONSUMERS],
 })
 export class AppModule {}
