@@ -8,12 +8,16 @@ import {
   simulateComputationIntensiveTask,
   simulateComputationLightTask,
 } from '../tasks';
+import { QUEUE_CONCURRENCY } from '../../../../constants';
 
 @Processor(QUEUE_NAMES.QUEUE7)
 export class Queue7Job {
   private readonly logger = new Logger(Queue7Job.name);
 
-  @Process(JOB_NAMES.LOCAL_SCOPED_JOB_FOR_QUEUE7)
+  @Process({
+    name: JOB_NAMES.LOCAL_SCOPED_JOB_FOR_QUEUE7,
+    concurrency: QUEUE_CONCURRENCY,
+  })
   async queue7Job(job: Job) {
     this.logger.log(`${JOB_NAMES.LOCAL_SCOPED_JOB_FOR_QUEUE7}: Started`);
     const { data } = job;
