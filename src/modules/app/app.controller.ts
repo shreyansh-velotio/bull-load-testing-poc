@@ -1,27 +1,28 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 
 import { AppService } from './app.service';
+import { AddJobRequestDto } from './dto/add-job-request.dto';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
-  @Post('local-jobs')
-  async addLocalJob(@Body('jobType') jobType: string) {
-    await this.appService.addLocalJob(jobType);
+  @Post('local-job')
+  async addLocalJob(@Body() request: AddJobRequestDto) {
+    await this.appService.addLocalJob(
+      request.queueNumber,
+      request.isComputationIntensive,
+    );
     return {
       message: 'Local job added',
     };
   }
 
-  @Post('global-jobs')
-  async addGlobalJob(@Body('jobType') jobType: string) {
-    await this.appService.addGlobalJob(jobType);
+  @Post('global-job')
+  async addGlobalJob(@Body() request: AddJobRequestDto) {
+    await this.appService.addGlobalJob(
+      request.queueNumber,
+      request.isComputationIntensive,
+    );
     return {
       message: 'Global job added',
     };

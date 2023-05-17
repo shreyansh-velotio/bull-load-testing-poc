@@ -1,4 +1,12 @@
 export enum QUEUE_NAMES {
-  LOCAL_SCHEDULED_JOBS_QUEUE = 'local-scheduled-jobs-queue',
-  GLOBAL_SCHEDULED_JOBS_QUEUE = 'global-scheduled-jobs-queue',
+  QUEUE1 = 'a491a65b-4d13-4e2d-8817-3de132f5edc6',
+  QUEUE2 = 'c85c3dbb-8e79-4971-ae6e-cd4643e2f959',
+  QUEUE3 = 'fd2e8316-102b-4155-9a70-7b8256b441c1',
+  QUEUE4 = '01b8c947-30e7-4f1c-9db9-cc22d90b704f',
+  QUEUE5 = 'a46c2931-35b4-4d4b-8a57-04e2fb374858',
+  QUEUE6 = 'd23c645d-0e14-4c20-961b-926ed2a0d8e3',
+  QUEUE7 = 'e16a828f-6800-4a2b-b9da-685734f764fd',
+  QUEUE8 = '5737d0a5-d0a9-4874-bcfc-9d8e6e5f6d76',
+  QUEUE9 = '97b1d5d3-68f2-4b9f-9c7e-af1464d2c4c2',
+  QUEUE10 = 'c3dd10b6-042b-495f-98b6-67c0a609bfad',
 }
