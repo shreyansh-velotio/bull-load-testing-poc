@@ -21,6 +21,6 @@ export class TestRequestDto {
 
   @IsEnum(TestParameter)
   @IsOptional()
-  @Transform(({ value }) => value || TestParameter.NONE)
+  @Transform(({ value }) => value || TestParameter.BASIC)
   readonly testParameter: string;
 }

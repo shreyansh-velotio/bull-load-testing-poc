@@ -1,4 +1,6 @@
 /**
+ * Basic: Test the performance of jobs in no delay, no batching, and concurrency = 1.
+ *
  * Batch Processing: Test the performance of processing jobs in batches instead of one job at a time.
  * Measure the impact on throughput and processing time when processing multiple jobs in a single
  * operation.
@@ -13,7 +15,7 @@
  */
 
 export enum TestParameter {
-  NONE = 'none',
+  BASIC = 'basic',
   BATCH_PROCESSING = 'batch-processing',
   CONCURRENCY_SETTINGS = 'concurrency-settings',
   DELAYED_JOBS = 'delayed-jobs',
