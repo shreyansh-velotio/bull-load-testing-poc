@@ -8,7 +8,7 @@ export class BullTestController {
   constructor(private readonly sqLsChService: BullTestService) {}
 
   @Post()
-  async test(@Body() testRequest: TestRequestDto) {
+  test(@Body() testRequest: TestRequestDto) {
     this.sqLsChService.test(testRequest);
 
     const scope = testRequest.isJobGlobalScoped

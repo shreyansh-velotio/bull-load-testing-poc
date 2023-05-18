@@ -46,7 +46,7 @@ export class BullTestService {
     }
   }
 
-  private async testForNone(
+  private testForNone(
     useMultipleQueue = false,
     isJobComputationIntensive = false,
     isJobGlobalScoped = false,
@@ -72,7 +72,7 @@ export class BullTestService {
     }
   }
 
-  private async testForBatchProcessing(
+  private testForBatchProcessing(
     useMultipleQueue = false,
     isJobComputationIntensive = false,
     isJobGlobalScoped = false,
@@ -98,7 +98,7 @@ export class BullTestService {
     }
   }
 
-  private async testForDelayedJobs(
+  private testForDelayedJobs(
     useMultipleQueue = false,
     isJobComputationIntensive = false,
     isJobGlobalScoped = false,
