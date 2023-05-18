@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bull';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import GLOBAL_CONSUMERS from '../queues/consumers/global';
-import { REDIS_PASSWORD, REDIS_PORT, REDIS_URL } from '../../constants';
-import { QUEUE_NAMES } from '../queues/enums/queue-name.enum';
-import LOCAL_CONSUMERS from '../queues/consumers/local';
+import { ProducerController } from './producer.controller';
+import { ProducerService } from './producer.service';
+import GLOBAL_CONSUMERS from '../consumers/global';
+import { REDIS_PASSWORD, REDIS_PORT, REDIS_URL } from '../../shared/constants';
+import { QUEUE_NAMES } from '../enums/queue-name.enum';
+import LOCAL_CONSUMERS from '../consumers/local';
 
 const globalQueueProcessors = [...GLOBAL_CONSUMERS].map((consumer) => {
   return {
@@ -87,7 +87,8 @@ const globalQueueProcessors = [...GLOBAL_CONSUMERS].map((consumer) => {
       ],
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService, ...LOCAL_CONSUMERS],
+  controllers: [ProducerController],
+  providers: [ProducerService, ...LOCAL_CONSUMERS],
+  exports: [ProducerService],
 })
-export class AppModule {}
+export class ProducerModule {}

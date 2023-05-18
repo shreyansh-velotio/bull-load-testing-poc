@@ -5,7 +5,7 @@ import { Logger } from '@nestjs/common';
 
 import { QUEUE_NAMES } from '../../enums/queue-name.enum';
 import { JOB_NAMES } from '../../enums/job-name.enum';
-import { QUEUE_CONCURRENCY } from '../../../../constants';
+import { QUEUE_CONCURRENCY } from '../../../shared/constants';
 import {
   simulateComputationIntensiveTask,
   simulateComputationLightTask,

@@ -8,7 +8,7 @@ import {
   simulateComputationIntensiveTask,
   simulateComputationLightTask,
 } from '../tasks';
-import { QUEUE_CONCURRENCY } from '../../../../constants';
+import { QUEUE_CONCURRENCY } from '../../../shared/constants';
 
 @Processor(QUEUE_NAMES.QUEUE10)
 export class Queue10Job {

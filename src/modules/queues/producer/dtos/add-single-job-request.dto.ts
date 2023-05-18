@@ -1,6 +1,6 @@
 import { IsNumber, IsBoolean, IsNotEmpty, IsOptional } from 'class-validator';
 
-export class AddJobRequestDto {
+export class AddSingleJobRequestDto {
   @IsNumber()
   @IsNotEmpty()
   readonly queueNumber: number;
