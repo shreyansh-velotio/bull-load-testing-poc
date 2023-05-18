@@ -5,8 +5,8 @@ import { ProducerController } from './producer.controller';
 import { ProducerService } from './producer.service';
 import GLOBAL_CONSUMERS from '../consumer/global';
 import { REDIS_PASSWORD, REDIS_PORT, REDIS_URL } from '../../shared/constants';
-import { QUEUE_NAMES } from '../enums/queue-name.enum';
 import LOCAL_CONSUMERS from '../consumer/local';
+import { getQueues } from './helpers/producer.helper';
 
 const globalQueueProcessors = [...GLOBAL_CONSUMERS].map((consumer) => {
   return {
@@ -15,6 +15,13 @@ const globalQueueProcessors = [...GLOBAL_CONSUMERS].map((consumer) => {
     path: consumer.PATH,
     concurrency: consumer.CONCURRENCY,
   };
+});
+
+const registeredQueues = getQueues().map((queueName) => {
+  return BullModule.registerQueue({
+    name: queueName,
+    processors: [globalQueueProcessors.find((p) => p.queueName === queueName)],
+  });
 });
 
 @Module({
@@ -26,66 +33,7 @@ const globalQueueProcessors = [...GLOBAL_CONSUMERS].map((consumer) => {
         password: REDIS_PASSWORD,
       },
     }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE1,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE1),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE2,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE2),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE3,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE3),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE4,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE4),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE5,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE5),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE6,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE6),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE7,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE7),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE8,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE8),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE9,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE9),
-      ],
-    }),
-    BullModule.registerQueue({
-      name: QUEUE_NAMES.QUEUE10,
-      processors: [
-        globalQueueProcessors.find((p) => p.queueName === QUEUE_NAMES.QUEUE10),
-      ],
-    }),
+    ...registeredQueues,
   ],
   controllers: [ProducerController],
   providers: [ProducerService, ...LOCAL_CONSUMERS],

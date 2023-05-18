@@ -1,10 +1,10 @@
-import { InjectQueue } from '@nestjs/bull';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Queue, Job } from 'bull';
+import { InjectQueue } from '@nestjs/bull';
 
 import { QUEUE_NAMES } from '../enums/queue-name.enum';
 import { JOB_NAMES } from '../enums/job-name.enum';
-import { MAX_QUEUE_SIZE } from '../../shared/constants';
+import { MAX_QUEUE } from '../../shared/constants';
 
 @Injectable()
 export class ProducerService {
@@ -85,7 +85,7 @@ export class ProducerService {
   }
 
   private validateAndGetQueue(queueNumber: number): Queue<any> {
-    if (queueNumber < 1 && queueNumber > MAX_QUEUE_SIZE)
+    if (queueNumber < 1 && queueNumber > MAX_QUEUE)
       throw new BadRequestException('Invalid queue number');
 
     const queue = [

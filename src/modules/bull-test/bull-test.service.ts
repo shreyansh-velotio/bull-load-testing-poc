@@ -1,8 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { TestParameter } from '../shared/enums/test-parameter.enum';
 import { ProducerService } from '../queues/producer/producer.service';
 import { TestRequestDto } from './dtos/test-request.dto';
+import { MAX_JOB_PER_QUEUE, MAX_QUEUE } from '../shared/constants';
 
 @Injectable()
 export class BullTestService {
@@ -52,17 +53,17 @@ export class BullTestService {
     isJobGlobalScoped = false,
   ) {
     if (useMultipleQueue) {
-      for (let i = 1; i <= 10; i++) {
-        for (let j = 1; j <= 10; j++) {
+      for (let queue = 1; queue <= MAX_QUEUE; queue++) {
+        for (let job = 1; job <= MAX_JOB_PER_QUEUE; job++) {
           this.producerService.addJob(
-            i,
+            queue,
             isJobComputationIntensive,
             isJobGlobalScoped,
           );
         }
       }
     } else {
-      for (let i = 1; i <= 100; i++) {
+      for (let i = 1; i <= MAX_QUEUE * MAX_JOB_PER_QUEUE; i++) {
         this.producerService.addJob(
           1,
           isJobComputationIntensive,
@@ -78,20 +79,20 @@ export class BullTestService {
     isJobGlobalScoped = false,
   ) {
     if (useMultipleQueue) {
-      for (let i = 1; i <= 10; i++) {
+      for (let queue = 1; queue <= MAX_QUEUE; queue++) {
         this.producerService.addJobInBatch(
-          i,
+          queue,
           isJobComputationIntensive,
-          10,
+          MAX_JOB_PER_QUEUE,
           isJobGlobalScoped,
         );
       }
     } else {
-      for (let i = 1; i <= 10; i++) {
+      for (let queue = 1; queue <= MAX_QUEUE; queue++) {
         this.producerService.addJobInBatch(
           1,
           isJobComputationIntensive,
-          10,
+          MAX_JOB_PER_QUEUE,
           isJobGlobalScoped,
         );
       }
@@ -104,17 +105,17 @@ export class BullTestService {
     isJobGlobalScoped = false,
   ) {
     if (useMultipleQueue) {
-      for (let i = 1; i <= 10; i++) {
-        for (let j = 1; j <= 10; j++) {
+      for (let queue = 1; queue <= MAX_QUEUE; queue++) {
+        for (let job = 1; job <= MAX_JOB_PER_QUEUE; job++) {
           this.producerService.addJobWithDelay(
-            i,
+            queue,
             isJobComputationIntensive,
             isJobGlobalScoped,
           );
         }
       }
     } else {
-      for (let i = 1; i <= 100; i++) {
+      for (let i = 1; i <= MAX_QUEUE * MAX_JOB_PER_QUEUE; i++) {
         this.producerService.addJobWithDelay(
           1,
           isJobComputationIntensive,

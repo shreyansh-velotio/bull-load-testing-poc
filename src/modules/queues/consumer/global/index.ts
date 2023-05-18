@@ -8,6 +8,7 @@ import { Queue7Job } from './queue7-job';
 import { Queue8Job } from './queue8-job';
 import { Queue9Job } from './queue9-job';
 import { Queue10Job } from './queue10-job';
+import { MAX_QUEUE } from '../../../shared/constants';
 
 const GLOBAL_CONSUMERS = [
   Queue1Job,
@@ -20,6 +21,6 @@ const GLOBAL_CONSUMERS = [
   Queue8Job,
   Queue9Job,
   Queue10Job,
-];
+].splice(0, MAX_QUEUE);
 
 export default GLOBAL_CONSUMERS;
