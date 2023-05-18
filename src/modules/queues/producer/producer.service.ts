@@ -31,25 +31,27 @@ export class ProducerService {
     private queue10: Queue,
   ) {}
 
-  async addLocalJob(
+  public async addJob(
     queueNumber: number,
-    isComputationIntensive = false,
+    isComputationIntensive: boolean,
+    isJobGlobalScoped: boolean,
   ): Promise<Job<any>> {
     const queue = this.validateAndGetQueue(queueNumber);
-    const jobName = this.getLocalJobName(queueNumber);
+    const jobName = this.getJobName(queueNumber, isJobGlobalScoped);
 
     return queue.add(JOB_NAMES[jobName], {
       isComputationIntensive,
     });
   }
 
-  async addLocalJobInBatch(
+  public async addJobInBatch(
     queueNumber: number,
-    isComputationIntensive = false,
-    batchSize = 10,
+    isComputationIntensive: boolean,
+    batchSize: number,
+    isJobGlobalScoped: boolean,
   ): Promise<Job<any>[]> {
     const queue = this.validateAndGetQueue(queueNumber);
-    const jobName = this.getLocalJobName(queueNumber);
+    const jobName = this.getJobName(queueNumber, isJobGlobalScoped);
 
     const jobs = [];
     for (let i = 0; i < batchSize; i++) {
@@ -63,12 +65,13 @@ export class ProducerService {
     return queue.addBulk(jobs);
   }
 
-  async addLocalJobWithDelay(
+  public async addJobWithDelay(
     queueNumber: number,
-    isComputationIntensive = false,
+    isComputationIntensive: boolean,
+    isJobGlobalScoped: boolean,
   ): Promise<Job<any>> {
     const queue = this.validateAndGetQueue(queueNumber);
-    const jobName = this.getLocalJobName(queueNumber);
+    const jobName = this.getJobName(queueNumber, isJobGlobalScoped);
 
     return queue.add(
       JOB_NAMES[jobName],
@@ -79,18 +82,6 @@ export class ProducerService {
         delay: 1000,
       },
     );
-  }
-
-  async addGlobalJob(
-    queueNumber: number,
-    isComputationIntensive = false,
-  ): Promise<Job<any>> {
-    const queue = this.validateAndGetQueue(queueNumber);
-    const jobName = this.getGlobalJobName(queueNumber);
-
-    return queue.add(JOB_NAMES[jobName], {
-      isComputationIntensive,
-    });
   }
 
   private validateAndGetQueue(queueNumber: number): Queue<any> {
@@ -112,11 +103,9 @@ export class ProducerService {
     return queue[queueNumber - 1];
   }
 
-  private getLocalJobName(queueNumber: number): string {
-    return `LOCAL_SCOPED_JOB_FOR_QUEUE${queueNumber}`;
-  }
-
-  private getGlobalJobName(queueNumber: number): string {
-    return `GLOBAL_SCOPED_JOB_FOR_QUEUE${queueNumber}`;
+  private getJobName(queueNumber: number, isJobGlobalScoped: boolean): string {
+    return isJobGlobalScoped
+      ? `GLOBAL_SCOPED_JOB_FOR_QUEUE${queueNumber}`
+      : `LOCAL_SCOPED_JOB_FOR_QUEUE${queueNumber}`;
   }
 }

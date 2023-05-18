@@ -8,9 +8,10 @@ export class ProducerController {
   constructor(private readonly producerService: ProducerService) {}
   @Post('local-job')
   async addLocalJob(@Body() request: AddSingleJobRequestDto) {
-    await this.producerService.addLocalJob(
+    await this.producerService.addJob(
       request.queueNumber,
       request.isComputationIntensive,
+      false,
     );
     return {
       message: 'Local job added',
@@ -19,9 +20,10 @@ export class ProducerController {
 
   @Post('global-job')
   async addGlobalJob(@Body() request: AddSingleJobRequestDto) {
-    await this.producerService.addGlobalJob(
+    await this.producerService.addJob(
       request.queueNumber,
       request.isComputationIntensive,
+      true,
     );
     return {
       message: 'Global job added',

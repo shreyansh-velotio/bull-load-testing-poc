@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
 import { ProducerModule } from './modules/queues/producer/producer.module';
-import { SqLsChModule } from './modules/scenarios/sq-ls-ch/sq-ls-ch.module';
+import { BullTestModule } from './modules/bull-test/bull-test.module';
 
 @Module({
-  imports: [ProducerModule, SqLsChModule],
+  imports: [ProducerModule, BullTestModule],
 })
 export class AppModule {}
