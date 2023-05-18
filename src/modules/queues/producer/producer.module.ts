@@ -3,10 +3,10 @@ import { BullModule } from '@nestjs/bull';
 
 import { ProducerController } from './producer.controller';
 import { ProducerService } from './producer.service';
-import GLOBAL_CONSUMERS from '../consumers/global';
+import GLOBAL_CONSUMERS from '../consumer/global';
 import { REDIS_PASSWORD, REDIS_PORT, REDIS_URL } from '../../shared/constants';
 import { QUEUE_NAMES } from '../enums/queue-name.enum';
-import LOCAL_CONSUMERS from '../consumers/local';
+import LOCAL_CONSUMERS from '../consumer/local';
 
 const globalQueueProcessors = [...GLOBAL_CONSUMERS].map((consumer) => {
   return {
