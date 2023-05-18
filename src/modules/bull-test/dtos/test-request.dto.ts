@@ -1,7 +1,7 @@
 import { IsEnum, IsBoolean, IsOptional } from 'class-validator';
 import { Transform } from 'class-transformer';
 
-import { TestParameter } from '../../shared/enums/test-scenario.enum';
+import { TestParameter } from '../../shared/enums/test-parameter.enum';
 
 export class TestRequestDto {
   @IsBoolean()

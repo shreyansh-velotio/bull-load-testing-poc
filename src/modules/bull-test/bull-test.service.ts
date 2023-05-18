@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-import { TestParameter } from '../shared/enums/test-scenario.enum';
+import { TestParameter } from '../shared/enums/test-parameter.enum';
 import { ProducerService } from '../queues/producer/producer.service';
 import { TestRequestDto } from './dtos/test-request.dto';
 
