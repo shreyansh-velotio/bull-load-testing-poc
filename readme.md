@@ -221,7 +221,7 @@ The analysis of the "bull" library using different test scenarios with varying c
 
 ## How to test this on your own?
 
-- Clone this repository `git clone [https://github.com/shreyansh-velotio/bull-load-testing-poc.git](https://github.com/shreyansh-velotio/bull-load-testing-poc.git)`
+- Clone this repository `git clone https://github.com/shreyansh-velotio/bull-load-testing-poc.git`
 - Install all the packages `npm install`
 - We need a remote Redis server for this, which you can get on [Redis cloud](https://app.redislabs.com/) (they provide a free tier which is sufficient for the tests)
 - Add the credentials (`REDIS_URL`, `REDIS_PORT`, `REDIS_PASSWORD`, `REDIS_USER`) of the Redis server in the [App file](https://github.com/shreyansh-velotio/bull-load-testing-poc/blob/master/src/modules/shared/constants.ts)
