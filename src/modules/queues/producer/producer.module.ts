@@ -4,7 +4,12 @@ import { BullModule } from '@nestjs/bull';
 import { ProducerController } from './producer.controller';
 import { ProducerService } from './producer.service';
 import GLOBAL_CONSUMERS from '../consumer/global';
-import { REDIS_PASSWORD, REDIS_PORT, REDIS_URL } from '../../shared/constants';
+import {
+  REDIS_PASSWORD,
+  REDIS_PORT,
+  REDIS_URL,
+  REDIS_USER,
+} from '../../shared/constants';
 import LOCAL_CONSUMERS from '../consumer/local';
 import { getQueues } from './helpers/producer.helper';
 
@@ -31,6 +36,7 @@ const registeredQueues = getQueues().map((queueName) => {
         host: REDIS_URL,
         port: REDIS_PORT,
         password: REDIS_PASSWORD,
+        username: REDIS_USER,
       },
     }),
     ...registeredQueues,
