@@ -48,7 +48,7 @@ The scenarios cover **different combinations of queue quantity, task type, and s
 - Single Queue, Computation Light, Local Scoped
 
 <aside>
-💡 All the scenarios will be **tested for queue’s concurrency 1 and 4** so that we can analyze if the concurrency can improve the efficiency of the queues.
+💡 All the scenarios will be *tested for queue’s concurrency 1 and 4* so that we can analyze if the concurrency can improve the efficiency of the queues.
 
 </aside>
 
