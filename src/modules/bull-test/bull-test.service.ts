@@ -33,7 +33,7 @@ export class BullTestService {
         );
         break;
       /**
-       * To test concurrency-settings, one need to manually change the QUEUE's concurrency
+       * To test the concurrency settings, one need to manually change the QUEUE's concurrency
        * on file src/modules/shared/constants.ts to test different concurrency settings
        */
       case TestParameter.CONCURRENCY_SETTINGS:
