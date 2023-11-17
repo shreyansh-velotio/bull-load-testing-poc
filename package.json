@@ -1,7 +1,7 @@
 {
   "name": "bull-load-testing-poc",
   "version": "0.0.1",
-  "description": "",
+  "description": "Bull queue load testing poc",
   "author": "Shreyansh Shrey",
   "private": true,
   "license": "UNLICENSED",
